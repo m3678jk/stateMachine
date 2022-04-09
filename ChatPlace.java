@@ -1,6 +1,8 @@
 public enum ChatPlace {
-    idle, onStart, onInfoOrSetting, onInfo, onQtyAndBankAndCcyAndTime, onCcySetting, onQtySetting, onBankSetting,
-    onTimeSetting,
-    onCurrencyChosen,
-    getOnTimeSetting
+    idle, startPressed, infoPressed, 
+    settingPressed , 
+    qtyChosen, 
+    bankChosen,
+    currencyChosen,
+    timeChosen,
 }
