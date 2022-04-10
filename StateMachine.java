@@ -1,25 +1,10 @@
-package stateMachine;
-
-import org.checkerframework.checker.units.qual.C;
-
 import java.sql.Time;
-import java.time.Clock;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class StateMachine {
 
-    private ChatSettings chatSettings;
-
-//    private List <StateMachineListener> listeners = new ArrayList<>();
-//
-//    void addListener(StateMachineListener stateMachineListener){
-//        listeners.add(stateMachineListener);
-//    }
-
-    {
-        chatSettings = new ChatSettings();
-    }
+    private ChatSettings chatSettings = new ChatSettings();
+    
 
     public void setQtyOfSignAfterPoint(int number) {
         chatSettings.setQuantityOfSignsAfterDot(number);
@@ -33,7 +18,7 @@ public class StateMachine {
         if (text.equals("Notification off")) {
             chatSettings.setDoNotify(false);
         } else {
-            chatSettings.setNotifyTime(new Time(Integer.parseInt(text)));
+            chatSettings.setNotifyTime(new Time(Integer.parseInt(text), 0,0));
         }
 
     }
@@ -67,10 +52,20 @@ public class StateMachine {
 
     void save() {
         System.out.println("data is saved - method should be done");
-        //TODO
+
+        System.out.println("stateMachine.toString() = " + toString());
+        //TODO our instance of StateMachine
+        // should be saved in Map with <ChatId, StateMachine>
+
+        // then separately using stateMachine setting look up for needed info in currency service
     }
 
-
+    @Override
+    public String toString() {
+        return "StateMachine{" +
+                "chatSettings=" + chatSettings +
+                '}';
+    }
 }
 
 class ChatSettings {
@@ -126,21 +121,33 @@ class ChatSettings {
     public void setNotifyTime(Time notifyTime) {
         this.notifyTime = notifyTime;
     }
-    
+
     public Time getNotifyTime() {
         return notifyTime;
     }
 
-    //   it maybe will be needed for creating default settings, but for now it just disturbs to use above methods
-//    public ChatSettings(boolean isUsdNeed, boolean isEurNeed, String bank, int quantityOfSignsAfterDot, boolean doNotify, Clock notifyTime) {
-//        this.isUsdNeed = isUsdNeed;
-//        this.isEurNeed = isEurNeed;
-//        this.bank = bank;
-//        this.quantityOfSignsAfterDot = quantityOfSignsAfterDot;
-//        this.doNotify = doNotify;
-//        this.notifyTime = notifyTime;
-//    }
-    
+     //  default settings
+    public ChatSettings() {
+        this.isUsdNeed = true;
+        this.isEurNeed = false;
+        this.bank = "NBU";
+        this.quantityOfSignsAfterDot = 2;
+        this.doNotify = true;
+        //cannot find alternative
+        this.notifyTime = new Time(11, 0,0);
+    }
+
+    @Override
+    public String toString() {
+        return "ChatSettings{" +
+                "isUsdNeed=" + isUsdNeed +
+                ", isEurNeed=" + isEurNeed +
+                ", bank='" + bank + '\'' +
+                ", quantityOfSignsAfterDot=" + quantityOfSignsAfterDot +
+                ", doNotify=" + doNotify +
+                ", notifyTime=" + notifyTime +
+                '}';
+    }
 }
 
 
