@@ -1,14 +1,15 @@
 package stateMachine;
 
 import lombok.Data;
+
 import java.sql.Time;
 
 public class StateMachine {
 
     private ChatSettings chatSettings = new ChatSettings();
 
-    public void setQtyOfSignAfterPoint(int number) {
-        chatSettings.setQuantityOfSignsAfterDot(number);
+    public void setQtyOfSignAfterPoint(String text) {
+        chatSettings.setQuantityOfSignsAfterDot(Integer.parseInt(text));
     }
 
     public void setBank(String name) {
@@ -83,6 +84,54 @@ class ChatSettings {
     private boolean doNotify;
     private Time notifyTime;
 
+    public int getQuantityOfSignsAfterDot() {
+        return quantityOfSignsAfterDot;
+    }
+
+    public void setQuantityOfSignsAfterDot(int quantityOfSignsAfterDot) {
+        this.quantityOfSignsAfterDot = quantityOfSignsAfterDot;
+    }
+
+
+    public boolean isUsdNeed() {
+        return isUsdNeed;
+    }
+
+    public void setUsdNeed(boolean usdNeed) {
+        isUsdNeed = usdNeed;
+    }
+
+    public boolean isEurNeed() {
+        return isEurNeed;
+    }
+
+    public void setEurNeed(boolean eurNeed) {
+        isEurNeed = eurNeed;
+    }
+
+    public void setBank(String bank) {
+        this.bank = bank;
+    }
+
+    public String getBank() {
+        return bank;
+    }
+
+    public void setDoNotify(boolean doNotify) {
+        this.doNotify = doNotify;
+    }
+
+    public boolean isDoNotify() {
+        return doNotify;
+    }
+
+    public void setNotifyTime(Time notifyTime) {
+        this.notifyTime = notifyTime;
+    }
+
+    public Time getNotifyTime() {
+        return notifyTime;
+    }
     //default data
     public ChatSettings() {
         this.isUsdNeed = true;
