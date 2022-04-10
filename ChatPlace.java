@@ -1,8 +1,10 @@
 public enum ChatPlace {
-    idle, startPressed, infoPressed,
+    idle,
+    infoPressed,
     settingPressed ,
-    waitForQtyChosen,
-    waitForBankChosen,
+
+    waitForQty,
+    waitForBank,
     waitForCurrency,
     waitForTime,
 }
